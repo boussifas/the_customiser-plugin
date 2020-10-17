@@ -49,6 +49,7 @@ function plugin_initialize() {
     }
 }
 
+
 //UNINSTALL PLUGIN
 register_uninstall_hook(__FILE__, 'plugin_uninstall');
 function plugin_uninstall() {

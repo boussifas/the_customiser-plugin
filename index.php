@@ -14,6 +14,7 @@
  * Author:            Boussif Asma
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       the-customiser
  * Domain Path:       /languages/
  * Copyright          2020-2022 
  */
