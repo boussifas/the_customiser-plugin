@@ -13,10 +13,15 @@ function cs_menu_output(){
          }
        ?>
        <div>
-          <span>In progress (this is supposed to be a tab) </span>
-          <button>Add Elements to your website</button>
-          <button> Customise your website template</button>
+         <span>With the Customiser you can customise dashboard and website </span>
+       </div>
+       <div>
+          <button>Manage Metaboxes</button>
+          <button>Add and Manage Tags</button>
+          <button> Customise your website(template + components)</button>
           <button> Add Widgets</button>
+          <button> Add Custom PostType</button>
+          <button> Manage Role</button>
        </div>
    </div>
    <?php

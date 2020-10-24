@@ -2,6 +2,8 @@
 
 
 require_once( dirname( __FILE__ ) . '/core/admin.php' );
+require_once( dirname( __FILE__ ) . '/core/modules/cs_widget/cs_widget.php' );
+
 
 //INIT PLUGIN
 init();

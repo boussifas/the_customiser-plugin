@@ -6,6 +6,8 @@
  */
 
 require_once( dirname( __FILE__ ) . '/../pages/dashboard.php' );
+require_once( dirname( __FILE__ ) . '/../core/modules/cs_widget/cs_widget.php' );
+
 
 // To Make sure the file is not directly accessible.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,6 +27,9 @@ function init() {
   add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ),'plugin_action_links');
   //enqueue 
   add_action( 'admin_print_styles', 'enqueue_styles' );
+  
+ //just for test
+ test_cs_widget();
 }
 
 /**
@@ -69,17 +74,10 @@ function customizer_menu(){
 	add_menu_page('Plugin Title', 'The Customiser', 'manage_options', 'cs-menu', 'cs_menu_output','',60);
 	add_submenu_page('cs-menu', 'Manage Roles', 'Roles', 'manage_options', '','cs_manage_roles' );
 	add_submenu_page('cs-menu', 'Settings', 'Settings', 'manage_options', '','cs_manage_components' );
-	add_submenu_page('cs-menu', 'The customiser Premium', 'Premium','manage_options', '','cs_premium_version' );
+  add_submenu_page('cs-menu', 'The customiser Premium', 'Premium','manage_options', '','cs_premium_version' );
+ 
 }
-////temp fn
-add_action( 'init', 'customiser_post_type' );
-function customiser_post_type() {
-  $args = array(
-    'public' => true,
-    'label'  => 'Board Games'
-  );
-  register_post_type( 'boardgames', $args );
-}
+
 
 add_action('init','delete_post_type');
 function delete_post_type(){
@@ -105,4 +103,21 @@ function add_plugin_link( $plugin_actions, $plugin_file ) {
  */
 function plugin_manage_link( $actions, $plugin_file, $plugin_data, $context ) {
 	return array_merge( array( 'configure' => '' . __( 'Configure' ) . '' ), $actions );
+}
+
+////to be deleted later 
+function test_cs_widget(){
+  $cs_init_widget = new CS_Widget();
+  $cs_init_widget->cs_init_widget();
+
+}
+
+////temp fn
+add_action( 'init', 'customiser_post_type' );
+function customiser_post_type() {
+  $args = array(
+    'public' => true,
+    'label'  => 'Board Games'
+  );
+  register_post_type( 'boardgames', $args );
 }
