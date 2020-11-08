@@ -2,7 +2,9 @@
 
 
 require_once( dirname( __FILE__ ) . '/core/admin.php' );
-require_once( dirname( __FILE__ ) . '/core/modules/cs_widget/cs_widget.php' );
+//require_once( dirname( __FILE__ ) . '/core/modules/cs_widget/cs_widget.php' );
+require_once( dirname( __FILE__ ) . '/core/modules/cs_widget/dashboard_widget.php' );
+
 
 
 //INIT PLUGIN

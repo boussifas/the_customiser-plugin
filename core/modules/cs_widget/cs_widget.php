@@ -1,84 +1,43 @@
 <?php
-/**
- * CS Widget core class.
- *
- * @package The Customiser
- */
+// Check the widget options
+$title    = isset( $instance['title'] ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
+$text     = isset( $instance['text'] ) ? $instance['text'] : '';
+$textarea = isset( $instance['textarea'] ) ?$instance['textarea'] : '';
+$select   = isset( $instance['select'] ) ? $instance['select'] : '';
+$checkbox = ! empty( $instance['checkbox'] ) ? $instance['checkbox'] : false;
 
-class CS_Widget extends WP_Widget {
+// WordPress core before_widget hook (always include )
+echo $before_widget;
 
-    /**
-     * Option array passed to wp_register_sidebar_widget().
-     *
-     * @since 2.8.0
-     * @var array
-     */
-    public $cs_widget_name;
+// Display the widget
+echo '<div class="widget-text wp_widget_plugin_box">';
 
-    /**
-     * Option array passed to wp_register_sidebar_widget().
-     *
-     * @since 2.8.0
-     * @var array
-     */
-    private $cs_widget_options;
-
-  /**
-	 * Sets up the widgets name etc
-	*/
-	public function __construct() {
-		$widget_ops = array( 
-			'classname' => 'cs_widget',
-			'description' => 'CSWidget is awesome',
-		);
-		parent::__construct( 'cs_widget', 'CS Widget', $widget_ops );
-  }
-  
-  /**
-	 * Render Cs_Widget
-	*/
-  public function widget( $args, $instance ) {
-    $title = apply_filters( 'widget_title', $instance['title'] );
-      
-    // before and after widget arguments are defined by themes
-    echo $args['before_widget'];
-    if ( ! empty( $title ) )
-    echo $args['before_title'] . $title . $args['after_title'];
-      
-    // This is where you run the code and display the output
-    echo __( 'Hello, World!', 'wpb_widget_domain' );
-    echo $args['after_widget'];
+    // Display widget title if defined
+    if ( $title ) {
+        echo $before_title . $title . $after_title;
     }
-       
-  /**
-	 * Outputs the options form on admin
-	 *
-	 * @param array $instance The widget options
-	 */
-	public function form( $instance ) {
-    if ( isset( $instance[ 'title' ] ) ) {
-      $title = $instance[ 'title' ];
-      }
-      else {
-      $title = __( 'New title', 'wpb_widget_domain' );
-      }
-      // Widget admin form
-      ?>
-      <p>
-      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-      <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-      </p>
-      <?php
-	}
 
-  /**
-	 * Register Widget
-	*/
-  public function cs_init_widget(){
-    add_action( 'widgets_init', function(){
-        register_widget( 'CS_Widget' );
-    });
-  } 
-   
+    // Display text field
+    if ( $text ) {
+        echo '<p>' . $text . '</p>';
+    }
 
-}
+    // Display textarea field
+    if ( $textarea ) {
+        echo '<p>' . $textarea . '</p>';
+    }
+
+    // Display select field
+    if ( $select ) {
+        echo '<p>' . $select . '</p>';
+    }
+
+    // Display something if checkbox is true
+    if ( $checkbox ) {
+        echo '<p>Something awesome</p>';
+    }
+
+echo '</div>';
+
+// WordPress core after_widget hook (always include )
+echo $after_widget;

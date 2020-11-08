@@ -27,15 +27,16 @@ function cs_menu_output(){
    <?php
 }
 
-function cs_manage_roles(){
-	echo "<p> Manage roles</p>";
-}
-
 
 function cs_premium_version(){
-	echo "<p> Upgrade</p>";
+	?>
+   <div class="cs_wrapper" id="cs_premium_screen">
+      <h2>Go Premium to have more options</h2>
+   </div>
+   <?php
 }
 
 function cs_manage_components(){
-	echo "<p> Add Components in Dashboard to Easily  Customise your site </p>";
+   //wp_enqueue_style('style',  plugin_dir_url(__FILE__) . "../_inc/assets/css/style.css");
+   require_once( dirname( __FILE__ ) . '/cs-widget.php' );
 }
