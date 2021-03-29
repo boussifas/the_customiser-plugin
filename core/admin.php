@@ -7,8 +7,6 @@
  */
 
 require_once(dirname(__FILE__) . '/../pages/dashboard.php');
-require_once(dirname(__FILE__) . '/../core/modules/cs_widget/cs_widget.class.php');
-
 
 // To Make sure the file is not directly accessible.
 if (!defined('ABSPATH')) {
@@ -42,6 +40,7 @@ function init()
 function enqueue_styles()
 {
   $plugin_url = plugin_dir_url(__FILE__);
+  wp_enqueue_style( 'bootstrap', $plugin_url . './../_inc/assets/css/bootstrap.css', array(), 20141119 );
   wp_enqueue_style('style',  $plugin_url . "./../_inc/assets/css/style.css");
 }
 
@@ -52,6 +51,10 @@ function enqueue_styles()
  */
 function enqueue_scripts()
 {
+  $plugin_url = plugin_dir_url(__FILE__);
+
+  wp_enqueue_script( 'bootstrap',  $plugin_url  . './../_inc/js/bootstrap.min.js', array('jquery'), '20120206', true );
+
 }
 
 /**
@@ -76,16 +79,9 @@ function load_i18n()
  */
 function customizer_menu()
 {
-  add_menu_page('Plugin Title', 'The Customiser', 'manage_options', 'cs-menu', 'cs_menu_output', '', 60);
-  add_submenu_page('cs-menu', 'Settings', 'Settings', 'manage_options', 'cs-settings', 'cs_manage_components');
-  add_submenu_page('cs-menu', 'The customiser Premium', 'Premium', 'manage_options', 'cs-premium', 'cs_premium_version');
-}
-
-
-add_action('init', 'delete_post_type');
-function delete_post_type()
-{
-  unregister_post_type('boardgames');
+  add_menu_page('Plugin Title', 'The Customiser', 'manage_options', 'cs-dashboard', 'cs_dashboard', '', 60);
+  add_submenu_page('cs-dashboard', 'Settings', 'Settings', 'manage_options', 'cs-settings', 'cs_settings');
+  add_submenu_page('cs-dashboard', 'The customiser Premium', 'Premium', 'manage_options', 'cs-premium', 'cs_premium_version');
 }
 
 
@@ -113,15 +109,3 @@ function plugin_manage_link($actions, $plugin_file, $plugin_data, $context)
   return array_merge(array('configure' => '' . __('Configure') . ''), $actions);
 }
 
-
-
-////temp fn
-add_action('init', 'customiser_post_type');
-function customiser_post_type()
-{
-  $args = array(
-    'public' => true,
-    'label'  => 'Board Games'
-  );
-  register_post_type('boardgames', $args);
-}

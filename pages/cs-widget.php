@@ -3,13 +3,13 @@
  * The Customiser widget Screen
  */
 
+  enqueue_scripts();
+  enqueue_styles();
 ?>
    <div class="cs_wrapper" id="cs_widget_screen">
-      <h2>The Customiser Widgets</h2>
       <div class="info-cntr">
           <img src="<?php echo plugin_dir_url(__FILE__); ?>../_inc/assets/images/info.png"/>
           <p>widgets are blocks of content that you can add to your site’s sidebars, footers, and other areas. The Customiser helps you to add Widgets to your and easily customize them</p>
-          <p> .</p>
       </div>
        <div class="widget-text wp_widget_plugin_box">
            <form  action="" method="post">
@@ -47,6 +47,7 @@
        </div>
    </div>
 <?php
+
 add_action('admin_post_my_plugin_register_user', 'create_cs_widget');
 function create_cs_widget()
 {
