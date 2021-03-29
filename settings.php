@@ -2,6 +2,10 @@
 
 
 require_once( dirname( __FILE__ ) . '/core/admin.php' );
+//require_once( dirname( __FILE__ ) . '/core/modules/cs_widget/cs_widget.php' );
+require_once( dirname( __FILE__ ) . '/core/modules/cs_widget/dashboard_widget.php' );
+
+
 
 //INIT PLUGIN
 init();
@@ -10,11 +14,12 @@ init();
 register_activation_hook( __FILE__, 'plugin_activation' );
 function plugin_activation() {
   add_option( 'plugin_activation','just-activated' );
+  add_option('cs_inst' ,'onboarding');
 
   //check version
   global $wp_version;
 	$php = '5.3';
-  $wp  = '3.8';
+    $wp  = '3.8';
 
   if ( version_compare( PHP_VERSION, $php, '<' ) ) {
 		deactivate_plugins( basename( __FILE__ ) );
@@ -41,14 +46,6 @@ function plugin_activation() {
 	}
 }
 
-add_action( 'admin_init','plugin_initialize' );
-function plugin_initialize() {
-    if( is_admin() && get_option( 'plugin_activation' ) == 'just-activated' ) {
-    delete_option( 'plugin_activation' );
-        flush_rewrite_rules();
-    }
-}
-
 //UNINSTALL PLUGIN
 register_uninstall_hook(__FILE__, 'plugin_uninstall');
 function plugin_uninstall() {
@@ -61,13 +58,12 @@ function plugin_uninstall() {
 //DESACTIVATE  PLUGIN
 register_deactivation_hook( __FILE__, 'plugin_deactivation' );
 function plugin_deactivation() {
-  delete_option('rewrite_rules');
+  delete_option('cs_inst');
 }
 
 /****
- * test plugin
+ * test plugin (to be deleted)
  */
-
 //add_action( 'admin_head', 'customizer_script' );
 function customizer_script() {
 	echo "
